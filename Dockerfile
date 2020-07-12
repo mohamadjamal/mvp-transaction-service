@@ -7,20 +7,17 @@
 
 FROM maven:3.6.3-jdk-11 AS build-env
 
-
-## 2. Install Git
-RUN apt-get update
-RUN apt-get install -y git
-
-## 3. Checkout code
+## 2. Create app directory
 WORKDIR /usr/src/app
-RUN git clone https://github.com/mohamadjamal/mvp-transaction-service.git
 
-## 4. Update work directory
-WORKDIR /usr/src/app/mvp-transaction-service
+## 3. Copy files which contains project dependencies
+COPY pom.xml /usr/src/app
 
-## 5. Package the artifact
-RUN mvn package
+## 4. Restore Dependencies
+RUN mvn -B dependency:resolve dependency:resolve-plugins
+
+## 5. Copy all source codes from application / microservice
+COPY src /usr/src/app/src
 
 ###################################
 ###     Runtime Environment     ###

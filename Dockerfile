@@ -9,15 +9,13 @@ RUN apt-get update
 RUN apt-get install -y git
 
 ## 2. Checkout code
+WORKDIR /usr/src/app
 RUN git clone https://github.com/mohamadjamal/mvp-transaction-service.git
 
 ## 3. Setup work directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/mvp-transaction-service
 
-## 4. Restore Dependencies
-RUN mvn -B dependency:resolve dependency:resolve-plugins
-
-## 5. Bundle app source
+## 4. Package the artifact
 RUN mvn package
 
 ###################################

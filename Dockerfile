@@ -19,6 +19,9 @@ RUN mvn -B dependency:resolve dependency:resolve-plugins
 ## 5. Copy all source codes from application / microservice
 COPY src /usr/src/app/src
 
+## 6. Package
+RUN mvn package
+
 ###################################
 ###     Runtime Environment     ###
 ###################################

@@ -7,6 +7,7 @@
 
 FROM maven:3.6.3-jdk-11 AS build-env
 
+
 ## 2. Create app directory
 WORKDIR /usr/src/app
 
@@ -17,9 +18,9 @@ COPY pom.xml /usr/src/app
 RUN mvn -B dependency:resolve dependency:resolve-plugins
 
 ## 5. Copy all source codes from application / microservice
-COPY src /usr/src/app/src
+COPY src /usr/src/app
 
-## 6. Package
+## 6. Package the artifact
 RUN mvn package
 
 ###################################
@@ -37,7 +38,7 @@ WORKDIR /app
 ENV JAVA_OPTS=""
 
 ## 3. Copy build output from Build environment 
-COPY --from=build-env /usr/src/app/target/mvp-transaction-service-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build-env /usr/src/app/workspace/target/mvp-transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
 ## 4. Expose application port
 EXPOSE 8080

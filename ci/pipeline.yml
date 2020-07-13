@@ -55,7 +55,7 @@ jobs:
   public: true
   serial: true
   plan:
-  - get: develop
+  - get: workspace
     resource: repo-dev
     trigger: true
 
@@ -64,23 +64,19 @@ jobs:
       platform: linux
       image_resource:
         type: docker-image
-        source:
-          repository: rbekker87/build-tools
 
       inputs:
-      - name: develop
+      - name: workspace
       outputs:
-      - name: develop
+      - name: workspace
 
       run:
         path: /bin/sh
         args:
         - -c
         - |
-          output_dir=develop
-          ls -lrt
-          cd develop
-          ls -lrt
+          output_dir=workspace
+          cd workspace
 
   - put: docker-remote-tunnel-image
     params:

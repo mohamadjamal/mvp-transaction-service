@@ -8,7 +8,7 @@
 FROM maven:3.6.3-jdk-11 AS build-env
 
 
-## 2. Create app directory
+## 2. Create app directory as workdir
 WORKDIR /usr/src/app
 
 ## 3. Copy files which contains project dependencies

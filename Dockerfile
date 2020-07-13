@@ -38,7 +38,7 @@ WORKDIR /app
 ENV JAVA_OPTS=""
 
 ## 3. Copy build output from Build environment 
-COPY --from=build-env /usr/src/app/workspace/target/mvp-transaction-service-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build-env /usr/src/app/develop/target/mvp-transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
 ## 4. Expose application port
 EXPOSE 8080

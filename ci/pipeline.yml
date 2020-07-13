@@ -55,7 +55,7 @@ jobs:
   public: true
   serial: true
   plan:
-  - get: workspace
+  - get: develop
     resource: repo-dev
     trigger: true
 
@@ -66,17 +66,17 @@ jobs:
         type: docker-image
 
       inputs:
-      - name: workspace
+      - name: develop
       outputs:
-      - name: workspace
+      - name: develop
 
       run:
         path: /bin/sh
         args:
         - -c
         - |
-          output_dir=workspace
-          cd workspace
+          output_dir=develop
+          cd develop
 
   - put: docker-remote-tunnel-image
     params:

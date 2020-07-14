@@ -1,0 +1,97 @@
+---
+#############################################
+## Groups
+#############################################
+
+groups:
+
+- name: dev
+  jobs: [build-dev]
+ 
+- name: qa
+  jobs: [build-qa]
+
+#############################################
+## Resources
+#############################################
+
+resources:
+
+- name: repo-dev
+  type: git
+  source:
+    uri: git@github.com:mohamadjamal/mvp-transaction-service.git
+    branch: master
+    private_key: ((private-repo-key))
+
+- name: repo-qa
+  type: git
+  source:
+    uri: git@github.com:mohamadjamal/mvp-transaction-service.git
+    branch: integration
+    private_key: ((private-repo-key))
+
+- name: docker-remote-tunnel-image
+  type: docker-image
+  source:
+    repository: mohamadjamal/bfs-mvp
+    tag: transaction-service-docker-aws
+    username: ((dockerhub-username))
+    password: ((dockerhub-access-token))
+
+#############################################
+## Jobs
+#############################################
+
+jobs:
+
+#############################################
+## build-dev
+#############################################
+
+- name: build-dev
+  public: true
+  serial: true
+  plan:
+  - get: develop
+    resource: repo-dev
+    trigger: true
+
+  - task: build-docker-image
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: alpine}
+
+      inputs:
+      - name: develop
+      outputs:
+      - name: develop
+
+      run:
+        path: /bin/sh
+        args:
+        - -c
+        - |
+          output_dir=develop
+          cd develop
+
+  - put: docker-remote-tunnel-image
+    params:
+      build: develop
+
+#############################################
+## build-qa
+#############################################
+
+- name: build-qa
+  public: true
+  serial: true
+  plan:
+  - get: integration
+    resource: repo-qa
+    trigger: true
+  - task: build-only
+    file: develop/ci/tasks/buildonly.yml
+    image: maven-task-image

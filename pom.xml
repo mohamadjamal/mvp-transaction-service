@@ -7,18 +7,20 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.1.RELEASE</version>
+		<version>2.2.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.demo.mvp.transactoins</groupId>
+	<groupId>com.demo.mvp.transactions</groupId>
 	<artifactId>simple-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simple-service</name>
 	<description>Simple Service</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.demo.mvp.transactions.Application</start-class>
 	</properties>
 
 	<dependencies>

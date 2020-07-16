@@ -5,7 +5,7 @@
 ## 1. Specify base image or sdk image
 
 
-FROM maven:3.6.3-jdk-11 AS build-env
+FROM maven:3.6.3-jdk-8 AS build-env
 
 
 ## 2. Create app directory as workdir
@@ -30,7 +30,7 @@ RUN mvn package
 ## 1. Specify runtime image
 
 
-FROM openjdk:11-jdk-slim as runtime
+FROM openjdk:8-jdk-alpine as runtime
 
 
 ## 2. Specify work directory

@@ -45,4 +45,4 @@ EXPOSE 8080
 
 ## 5. Start application using CMD or Entrypoint
 # ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar app.jar" ]
-ENTRYPOINT [ "java", "-jar", "/app.jar" ]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]

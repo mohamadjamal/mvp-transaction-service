@@ -15,6 +15,14 @@ groups:
 ## Resources
 #############################################
 
+resource_types:
+
+- name: kubernetes
+  type: docker-image
+  source:
+    repository: zlabjp/kubernetes-resource
+    tag: "1.17"
+
 resources:
 
 - name: repo-dev
@@ -38,6 +46,14 @@ resources:
     tag: transaction-service-docker-aws
     username: ((dockerhub-username))
     password: ((dockerhub-access-token))
+
+- name: deploy-dev-kubernetes
+  type: kubernetes
+  source:
+    server: ((kubernetes-server-url))
+    namespace: default
+    token: ((kubernetes-access-token))
+    certificate_authority: ((kubernetes-cert))
 
 #############################################
 ## Jobs
@@ -80,6 +96,11 @@ jobs:
   - put: docker-remote-tunnel-image
     params:
       build: develop
+
+  - put: deploy-dev-kubernetes
+    params:
+      kubectl: apply -f https://raw.githubusercontent.com/mohamadjamal/mvp-transaction-service/master/deployment.yml
+      wait_until_ready_selector: app=myapp
 
 #############################################
 ## build-qa

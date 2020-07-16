@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @ComponentScan("com.demo.mvp")
-public class TransactionServiceApplication {
+public class Application {
 
 	private static final String ALLOWED_ORIGIN = "*";
 
 	public static void main(String[] args) {
-		SpringApplication.run(TransactionServiceApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean

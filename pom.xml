@@ -11,25 +11,25 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.demo.bfs</groupId>
+	<groupId>com.demo.mvp.transactoins</groupId>
 	<artifactId>simple-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simple-service</name>
 	<description>Simple Service</description>
 
 	<properties>
-		<java.version>11</java.version>
-		<start-class>com.demo.mvp.transactions.TransactionServiceApplication</start-class>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

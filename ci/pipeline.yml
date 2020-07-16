@@ -99,8 +99,8 @@ jobs:
 
   - put: deploy-dev-kubernetes
     params:
-      kubectl: apply -f https://raw.githubusercontent.com/mohamadjamal/mvp-transaction-service/master/deployment.yml
-      wait_until_ready_selector: app=myapp
+      kubectl: apply -f https://raw.githubusercontent.com/selvendiranj/k8s-mvp/master/config -f https://raw.githubusercontent.com/selvendiranj/k8s-mvp/master/deployment.yaml
+      wait_until_ready_selector: app=bfs-mvp
 
 #############################################
 ## build-qa
